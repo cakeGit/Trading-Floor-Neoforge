@@ -1,4 +1,16 @@
+import org.yaml.snakeyaml.Yaml
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.yaml', name: 'snakeyaml', version: '1.19'
+    }
+}
+
 plugins {
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.78'
@@ -207,4 +219,61 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+publishMods {
+    def TOKENS = new HashMap<String, String>();
+    file("$projectDir/.env").readLines().each() {
+        def (key, value) = it.tokenize('=')
+        TOKENS.put(key, value)
+    }
+
+    def cfg = new Yaml().load(new File("$projectDir/changelog.yaml").newInputStream())
+    def changelogText = cfg[minecraft_version + "-" + project.version];
+    println("Found Changelog: \n" + changelogText)
+
+    def neoForgeName = "Create: Trading Floor $project.version Neoforge $minecraft_version";
+    def neoForgeFile = file("build/libs/trading_floor-${project.version}.jar");
+
+    def neoForgeEmoji = "<:neoforge:1267784950271443004>";
+    def newVersionPing = "<@&1287480930247643147>";
+
+    changelog = "Changelog: \n" + changelogText
+    type = STABLE
+    version = project.version
+//    dryRun = true
+
+    curseforge("neoforgeCF") {
+        file = neoForgeFile
+        displayName = neoForgeName
+        projectId = "1102591"
+        projectSlug = "create-trading-floor" // Required for discord webhook
+        accessToken = TOKENS.get("CURSEFORGE_PUBLISH_TOKEN")
+        minecraftVersions.add(minecraft_version)
+        announcementTitle = "Curseforge download for $neoForgeEmoji"
+        modLoaders.add("neoforge")
+
+        javaVersions.add(JavaVersion.VERSION_21)
+        clientRequired = true
+        serverRequired = true
+        requires("create")
+    }
+    modrinth("neoforgeMR") {
+        file = neoForgeFile
+        displayName = neoForgeName
+        projectId = "WROfLLvn"
+        accessToken = TOKENS.get("MODRINTH_PUBLISH_TOKEN")
+        minecraftVersions.add(minecraft_version)
+        announcementTitle = "Modrinth download for $neoForgeEmoji"
+        modLoaders.add("neoforge")
+        requires("create")
+    }
+
+    println("DISCORD MESSAGE:\n\n$newVersionPing\n# Create: Trading Floor has been updated to $project.version for $minecraft_version ($neoForgeEmoji)\n " + changelogText);
+
+//    discord("discordUniversal") {
+//        webhookUrl = TOKENS.get("DISCORD_WEBHOOK")
+//        username = "New Version Announcement | Create: Trading Floor"
+//        content ="\n# Create: Trading Floor has been updated to $project.version for $minecraft_version ($neoForgeEmoji)\n " + changelogText
+//    }
 }

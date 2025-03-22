@@ -1,0 +1,28 @@
+{
+  "parent": "create:root",
+  "criteria": {
+    "0": {
+      "trigger": "trading_floor:money_money_money_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.trading_floor.money_money_money.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "trading_floor:trading_depot"
+    },
+    "title": {
+      "translate": "advancement.trading_floor.money_money_money"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

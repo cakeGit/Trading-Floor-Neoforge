@@ -16,6 +16,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,7 @@ public class TradingFloor {
         TradingFloor.REGISTRATE.addDataGenerator(ProviderType.LANG, TradingFloor::addPostInitLang);
 
         eventBus.addListener(TradingFloorData::gatherData);
+        eventBus.addListener(TradingFloor::registerCapabilities);
         eventBus.addListener(TradingFloor::clientInit);
         eventBus.addListener(TradingFloor::onRegister);
         eventBus.addListener(TradingFloor::commonInit);
@@ -58,6 +60,9 @@ public class TradingFloor {
         TradingFloor.LOGGER.info("Finished Initialisation For Mod: " + TradingFloor.MOD_ID);
     }
 
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        TradingDepotBlockEntity.registerCapabilities(event);
+    }
     public static void onRegister(final RegisterEvent event) {
         if (event.getRegistry() == BuiltInRegistries.TRIGGER_TYPES) {
             TFAdvancements.register();

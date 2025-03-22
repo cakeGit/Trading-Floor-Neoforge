@@ -1,0 +1,40 @@
+---
+1.20.1-1.0.0: |
+  - Release!
+  - Adds the trading depot, with 2 ponders and various functions to automate villager trading
+1.20.1-1.0.1: |
+  - Changed block right click functionality
+1.20.1-1.0.2: |
+  - Public release
+  - Added item asset
+  - Added description details
+1.20.1-1.0.3: |
+  - Added shape
+  - Fixed thrown items not hitting depot
+1.20.1-1.0.4: |
+  - Added JEI view for possible recipes
+1.20.1-1.0.5: |
+  - Added forge update checker
+1.20.1-1.1.0: |
+  - Implemented multiloader capabilities (fabric port)
+1.20.1-1.1.1: |
+  - Fixed a crash on fabric and forge when using brass funnels
+1.20.1-1.1.2: |
+  - Fixed trading with farmers
+1.20.1-1.1.3: |
+  - Fixed a forge crash with a missing null-check
+1.20.1-1.1.4: |
+  - Changed to allow funnels to drop items onto the depot from all sides
+1.20.1-1.1.5: |
+  - Chinese translation also from TASC2 :D!
+1.20.1-1.1.6: |
+  - Fixed trade product count not tracking properly
+1.20.1-1.1.7: |
+  - Fixed fabric trade particles
+1.20.1-2.0.0: |
+  - (Potentially unstable) Port to create 6.0.0
+1.20.1-2.0.1: |
+  - Fixed wrong registrate import
+1.21.1-3.0.1: |
+  - Fixed item handlers not registering correctly
+...
