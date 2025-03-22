@@ -1,0 +1,32 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.cake.trading_floor.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AdvancementBuilderAccessMixin",
+    "AllArmInteractionPointTypesDepotTypeMixin",
+    "ChuteBlockEntityMixin",
+    "CreateCreativeModeTabMixin",
+    "WorkAtComposterMixin",
+    "WorkAtPoiMixin",
+    "item_listings.DyedArmorForEmeraldsAccessMixin",
+    "item_listings.EmeraldForItemsAccessMixin",
+    "item_listings.EmeraldsForVillagerTypeItemAccessMixin",
+    "item_listings.EnchantBookForEmeraldsAccessMixin",
+    "item_listings.EnchantedItemForEmeraldsAccessMixin",
+    "item_listings.ItemsAndEmeraldsToItemsAccessMixin",
+    "item_listings.ItemsForEmeraldsAccessMixin",
+    "item_listings.SussyStewForEmeraldsAccessMixin",
+    "item_listings.TippedArrowForItemsAndEmeraldsAccessMixin",
+    "item_listings.TreasureMapForEmeraldsAccessMixin"
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

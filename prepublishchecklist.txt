@@ -1,0 +1,12 @@
+- mod publish plugin with dryrun
+- check langs
+- check ponders
+- check chute
+- check jei
+- check multiple input
+- check filter
+- check advancement
+- logo and desc ingame
+- updateEntityAfterFallOn
+- crafting
+- require create ver
