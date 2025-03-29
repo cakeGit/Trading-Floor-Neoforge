@@ -249,9 +249,11 @@ public class TradingDepotBlockEntity extends SmartBlockEntity implements IHaveGo
         for (MerchantOffer offer : villager.getOffers()) {
             if (!hasSpace) break;
             
-            if (!((filtering.getFilter().getItem() instanceof FilterItem) &&
+            if (!filtering.getFilter().isEmpty() && (
+                !((filtering.getFilter().getItem() instanceof FilterItem) &&
                 filtering.test(offer.getResult()) ||
-                isRequiredItem(offer.getResult(), filtering.getFilter()))) continue;
+                isRequiredItem(offer.getResult(), filtering.getFilter()))
+            )) continue;
             List<TradingDepotBehaviour> filteredCostBSources = costBSources.stream().filter(depot -> depot.canBeUsedFor(offer)).toList();
             
             boolean trading = true;
