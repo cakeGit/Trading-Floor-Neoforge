@@ -39,4 +39,6 @@
   - Fixed item handlers not registering correctly
 1.21.1-3.0.2: |
   - Changed item filter to respect data by default
+1.21.1-3.0.3: |
+  - Added ru_ru localisation for 1.21.1
 ...
