@@ -10,6 +10,7 @@ import com.cake.trading_floor.foundation.advancement.TFAdvancements;
 import com.cake.trading_floor.registry.TFParticleEmitters;
 import com.cake.trading_floor.registry.TFRegistry;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
@@ -248,7 +249,11 @@ public class TradingDepotBlockEntity extends SmartBlockEntity implements IHaveGo
         for (MerchantOffer offer : villager.getOffers()) {
             if (!hasSpace) break;
             
-            if (!filtering.test(offer.getResult())) continue;
+            if (!filtering.getFilter().isEmpty() && (
+                !((filtering.getFilter().getItem() instanceof FilterItem) &&
+                filtering.test(offer.getResult()) ||
+                isRequiredItem(offer.getResult(), filtering.getFilter()))
+            )) continue;
             List<TradingDepotBehaviour> filteredCostBSources = costBSources.stream().filter(depot -> depot.canBeUsedFor(offer)).toList();
             
             boolean trading = true;
