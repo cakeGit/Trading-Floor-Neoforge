@@ -43,4 +43,7 @@
   - Added ru_ru localisation for 1.21.1
 1.21.1-3.0.4: |
   - Fixed empty item filter blocking trades
+1.21.1-3.0.6: |
+  - Added item tooltip to the trading depot
+  - Fixed package insertion limiting to 1
 ...

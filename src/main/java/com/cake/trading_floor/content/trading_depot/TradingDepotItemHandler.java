@@ -34,7 +34,7 @@ public class TradingDepotItemHandler implements net.neoforged.neoforge.items.IIt
         ItemStack existingStack = behaviour.getOfferStack();
         
         int oldCount = existingStack.getCount();
-        int newCount = Math.min(existingStack.getMaxStackSize(), oldCount + arg.getCount());
+        int newCount = Math.min(arg.getMaxStackSize(), oldCount + arg.getCount());
         int added = newCount - oldCount;
         int remaining = arg.getCount() - added;
         
