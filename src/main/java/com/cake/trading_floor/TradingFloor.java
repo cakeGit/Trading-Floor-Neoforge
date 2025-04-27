@@ -6,8 +6,12 @@ import com.cake.trading_floor.foundation.ponder_scenes.TFPonderPlugin;
 import com.cake.trading_floor.network.TFPackets;
 import com.cake.trading_floor.registry.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.KineticStats;
+import com.simibubi.create.foundation.item.TooltipModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import net.createmod.catnip.lang.FontHelper;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +36,12 @@ public class TradingFloor {
         init(eventBus, modContainer);
     }
 
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(TradingFloor.MOD_ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(TradingFloor.MOD_ID)
+        .setTooltipModifierFactory(item ->
+            new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
+                .andThen(TooltipModifier.mapNull(KineticStats.create(item)))
+        );;
+
     public void init(IEventBus eventBus, ModContainer modContainer) {
 
         TradingFloor.REGISTRATE.registerEventListeners(eventBus);
