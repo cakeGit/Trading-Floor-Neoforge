@@ -46,4 +46,6 @@
 1.21.1-3.0.6: |
   - Added item tooltip to the trading depot
   - Fixed package insertion limiting to 1
+1.21.1-3.0.7: |
+  - Added trading check cooldown again
 ...
