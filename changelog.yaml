@@ -48,4 +48,6 @@
   - Fixed package insertion limiting to 1
 1.21.1-3.0.7: |
   - Added trading check cooldown again
+1.21.1-3.0.8: |
+  - Tool breaking times
 ...
