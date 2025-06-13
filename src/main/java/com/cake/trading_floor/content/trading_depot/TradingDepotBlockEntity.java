@@ -1,5 +1,6 @@
 package com.cake.trading_floor.content.trading_depot;
 
+import com.cake.trading_floor.Config;
 import com.cake.trading_floor.content.trading_depot.behavior.TradingDepotBehaviour;
 import com.cake.trading_floor.content.trading_depot.behavior.TradingDepotValueBox;
 import com.cake.trading_floor.foundation.AttachedTradingDepotFinder;
@@ -274,6 +275,10 @@ public class TradingDepotBlockEntity extends SmartBlockEntity implements IHaveGo
                 }
                 
                 hadSuccessfulTrade = hadSuccessfulTrade || trading;
+
+                if (latestTradeCount >= Config.maxTradePerWork) {
+                    break;
+                }
             }
             
             //Only do one type of trade per cycle
