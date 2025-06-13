@@ -35,7 +35,8 @@ public class TFLangEntries {
 
         addLangEntries(
             "trading_floor.display_source.trade_product_sum", "Trade Products Total",
-            "trading_floor.display_source.trade_completed_count", "Trades Completed Count"
+            "trading_floor.display_source.trade_completed_count", "Trades Completed Count",
+            "block.trading_floor.trading_depot.tooltip.summary", "Trade with Villagers, note that villagers will _only trade during normal working times of day_."
         );
     }
     
