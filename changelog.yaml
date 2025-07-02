@@ -52,4 +52,6 @@
   - Tool breaking times
 1.21.1-3.0.9: |
   - Added a configurable limit on trading times per work cycle
+1.21.1-3.0.10: |
+  - Added a configurable experience generation per work cycle
 ...

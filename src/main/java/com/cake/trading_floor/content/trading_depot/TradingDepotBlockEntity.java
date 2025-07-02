@@ -10,6 +10,7 @@ import com.cake.trading_floor.foundation.advancement.TFAdvancementBehaviour;
 import com.cake.trading_floor.foundation.advancement.TFAdvancements;
 import com.cake.trading_floor.registry.TFParticleEmitters;
 import com.cake.trading_floor.registry.TFRegistry;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -306,12 +307,29 @@ public class TradingDepotBlockEntity extends SmartBlockEntity implements IHaveGo
             
             lastTradeCount = latestTradeCount;
         }
-        
+
+        int experienceCount = getExperienceProduced();
+        if (experienceCount > 0) {
+            tradingDepotBehaviour.getResults().add(new ItemStack(AllItems.EXP_NUGGET.get(), experienceCount));
+        }
+
         checkForAwardedAdvancements();
         
         notifyUpdate();
     }
-    
+
+    private int getExperienceProduced() {
+        if (!Config.shouldProduceExperience) return 0;
+
+        int experienceCount = 0;
+        for (int i = 0; i < Config.generatedExperienceCount; i++) {
+            if (level.random.nextDouble() < Config.chancePerExperience) {
+                experienceCount++;
+            }
+        }
+        return experienceCount;
+    }
+
     private void checkForAwardedAdvancements() {
         if (lastTrade != null && lastTrade.getResult().is(Items.EMERALD)) {
             TFAdvancementBehaviour advancementBehaviour = getBehaviour(TFAdvancementBehaviour.TYPE);
