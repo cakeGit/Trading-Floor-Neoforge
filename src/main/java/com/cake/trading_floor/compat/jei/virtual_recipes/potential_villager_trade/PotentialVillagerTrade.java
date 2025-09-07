@@ -32,7 +32,7 @@ public class PotentialVillagerTrade implements Recipe<RecipeInput> {
                     
                     if (offer != null && !existingOffers.contains(offer)) {
                         trades.add(new PotentialVillagerTrade(
-                            TradingFloor.asResource("trade_" + professionOffers.getKey().name() + "_level_" + levelOffers.getIntKey() + "_" + index),
+                            TradingFloor.asResource("trade_" + professionOffers.getKey().name().replace(":", "_") + "_level_" + levelOffers.getIntKey() + "_" + index),
                             levelOffers.getIntKey(),
                             professionOffers.getKey(),
                             offer

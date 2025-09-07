@@ -1,5 +1,6 @@
 package com.cake.trading_floor.content.trading_depot.behavior;
 
+import com.cake.trading_floor.TradingFloor;
 import com.cake.trading_floor.content.trading_depot.TradingDepotItemHandler;
 import com.cake.trading_floor.foundation.TFLang;
 import com.simibubi.create.content.kinetics.belt.BeltHelper;
@@ -17,11 +18,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
@@ -31,6 +35,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TradingDepotBehaviour extends BlockEntityBehaviour {
     
@@ -117,7 +123,7 @@ public class TradingDepotBehaviour extends BlockEntityBehaviour {
             .setInsertionHandler(this::tryInsertingFromSide));
         behaviours.add(invVersionTracker = new VersionedInventoryTrackerBehaviour(blockEntity));
     }
-    
+
     private ItemStack tryInsertingFromSide(TransportedItemStack transportedStack, Direction side, boolean simulate) {
         ItemStack inserted = transportedStack.stack;
         
@@ -140,26 +146,28 @@ public class TradingDepotBehaviour extends BlockEntityBehaviour {
     public int getPresentStackSize() {
         int cumulativeStackSize = 0;
         cumulativeStackSize += getOfferStack().getCount();
-        for (ItemStack stack : result)
-            cumulativeStackSize += stack
-                .getCount();
+        for (TransportedItemStack transportedItemStack : incoming)
+            cumulativeStackSize += transportedItemStack.stack.getCount();
         return cumulativeStackSize;
     }
     
     public int getRemainingSpace() {
         int cumulativeStackSize = getPresentStackSize();
-        for (TransportedItemStack transportedItemStack : incoming)
-            cumulativeStackSize += transportedItemStack.stack.getCount();
-        return 64 - cumulativeStackSize;
+        return getOfferStack().getMaxStackSize() - cumulativeStackSize;
     }
     
     public ItemStack insert(TransportedItemStack input, boolean simulate) {
         int remainingSpace = getRemainingSpace();
         ItemStack inserted = input.stack;
-        if (remainingSpace <= 0)
+        if (remainingSpace <= 0) {
             return inserted;
-        if (this.offer != null && !this.offer.stack.isEmpty() && !ItemHelper.canItemStackAmountsStack(this.offer.stack, inserted))
+        }
+        boolean offerNull = (this.offer == null);
+        boolean offerEmpty = (!offerNull && this.offer.stack.isEmpty());
+        boolean canCombine = offerNull || offerEmpty || ItemStack.isSameItemSameComponents(this.offer.stack, inserted);
+        if (!canCombine) {
             return inserted;
+        }
         
         ItemStack returned = ItemStack.EMPTY;
         if (remainingSpace < inserted.getCount()) {
