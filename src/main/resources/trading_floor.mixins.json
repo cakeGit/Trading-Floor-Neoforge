@@ -9,6 +9,7 @@
     "AllArmInteractionPointTypesDepotTypeMixin",
     "ChuteBlockEntityMixin",
     "CreateCreativeModeTabMixin",
+    "VillagerMixin",
     "WorkAtComposterMixin",
     "WorkAtPoiMixin",
     "item_listings.DyedArmorForEmeraldsAccessMixin",

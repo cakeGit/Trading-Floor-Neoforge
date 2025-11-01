@@ -6,6 +6,7 @@ import com.cake.trading_floor.content.trading_depot.behavior.TradingDepotValueBo
 import com.cake.trading_floor.foundation.AttachedTradingDepotFinder;
 import com.cake.trading_floor.foundation.MerchantOfferInfo;
 import com.cake.trading_floor.foundation.TFLang;
+import com.cake.trading_floor.foundation.access.VillagerExperienceAccessor;
 import com.cake.trading_floor.foundation.advancement.TFAdvancementBehaviour;
 import com.cake.trading_floor.foundation.advancement.TFAdvancements;
 import com.cake.trading_floor.registry.TFParticleEmitters;
@@ -246,6 +247,7 @@ public class TradingDepotBlockEntity extends SmartBlockEntity implements IHaveGo
         boolean hasSpace = true;
         
         MerchantOfferInfo latestTrade = null;
+        MerchantOffer latestTradeOffer = null;
         int latestTradeCount = 0;
         
         for (MerchantOffer offer : villager.getOffers()) {
@@ -272,6 +274,7 @@ public class TradingDepotBlockEntity extends SmartBlockEntity implements IHaveGo
                 
                 if (trading) {
                     latestTrade = new MerchantOfferInfo(offer);
+                    latestTradeOffer = offer;
                     latestTradeCount++;
                 }
                 
@@ -304,6 +307,10 @@ public class TradingDepotBlockEntity extends SmartBlockEntity implements IHaveGo
         if (latestTrade != null) {
             currentTradeCompletedCount += latestTradeCount;
             tradeOutputSum += latestTradeCount * latestTrade.getResult().getCount();
+
+            if (Config.shouldProduceVillagerExperience) {
+                ((VillagerExperienceAccessor) villager).trading_Floor_Neoforge$addExperienceForTrade(latestTradeCount, latestTradeOffer);
+            }
             
             lastTradeCount = latestTradeCount;
         }
