@@ -139,7 +139,7 @@ public class TFAdvancement {
         }
         
         Builder after(TFAdvancement other) {
-            TFAdvancement.this.parent = other.datagenResult;
+            parentId = TradingFloor.asResource(other.id);
             return this;
         }
 

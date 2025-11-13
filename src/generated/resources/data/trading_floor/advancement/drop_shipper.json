@@ -1,4 +1,5 @@
 {
+  "parent": "trading_floor:money_money_money",
   "criteria": {
     "0": {
       "trigger": "trading_floor:drop_shipper_builtin"

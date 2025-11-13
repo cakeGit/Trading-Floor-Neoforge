@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 public class TradingFloorData {
     
     public static void gatherData(GatherDataEvent event) {
-        if (!event.getMods().contains(Create.ID))
+        if (!event.getMods().contains(TradingFloor.MOD_ID))
             return;
 
         DataGenerator generator = event.getGenerator();
