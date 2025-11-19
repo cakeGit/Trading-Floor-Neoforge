@@ -28,7 +28,7 @@
   "trading_floor.tooltip.trading_depot.connected_to_other": "Объединено с",
   "trading_floor.tooltip.trading_depot.contents": "Содержимое торгового депо:",
   "trading_floor.tooltip.trading_depot.contents.input": "Подано (на это депо):",
-  "trading_floor.tooltip.trading_depot.contents.output": "Товары сделки:",
+  "trading_floor.tooltip.trading_depot.contents.output": "Результат сделки:",
   "trading_floor.tooltip.trading_depot.filtering.trade_filter": "Фильтр товара сделки",
   "trading_floor.tooltip.trading_depot.last_trade": "Последняя сделка:",
   "trading_floor.tooltip.trading_depot.other_trading_depot": "другим торговым депо",
