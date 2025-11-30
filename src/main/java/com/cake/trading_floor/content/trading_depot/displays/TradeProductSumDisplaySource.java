@@ -3,7 +3,6 @@ package com.cake.trading_floor.content.trading_depot.displays;
 import com.cake.trading_floor.content.trading_depot.TradingDepotBlockEntity;
 import com.cake.trading_floor.foundation.TFLang;
 import com.google.common.collect.ImmutableList;
-import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.source.SingleLineDisplaySource;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayTargetStats;
@@ -18,7 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class TradeProductSumDisplay extends SingleLineDisplaySource {
+public class TradeProductSumDisplaySource extends SingleLineDisplaySource {
     
     @Override
     protected MutableComponent provideLine(DisplayLinkContext context, DisplayTargetStats stats) {
