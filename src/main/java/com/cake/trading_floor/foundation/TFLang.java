@@ -58,6 +58,12 @@ public class TFLang {
             .add(text(" x" + stack.getCount()).style(ChatFormatting.GREEN));
     }
 
+    public static LangBuilder itemStackAlt(ItemStack stack) {
+        return builder()
+                .add(text(stack.getCount() + " ").style(ChatFormatting.GRAY))
+                .add(stack.getHoverName().copy().withStyle(ChatFormatting.GRAY));
+    }
+
     public static LangBuilder number(double d) {
         return builder().text(LangNumberFormat.format(d));
     }
