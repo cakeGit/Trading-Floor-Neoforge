@@ -33,39 +33,18 @@ public class TradeProductSumDisplaySource extends SingleLineDisplaySource {
     }
 
     @Override
+    protected String getTranslationKey() {
+        return "trade_product_sum";
+    }
+
+    @Override
     protected boolean allowsLabeling(DisplayLinkContext context) {
         return true;
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initConfigurationWidgets(DisplayLinkContext context, ModularGuiLineBuilder builder, boolean isFirstLine) {
-        if (isFirstLine && allowsLabeling(context))
-            addLabelingTextBox(builder);
+    protected String getFlapDisplayLayoutName(DisplayLinkContext context) {
+        return "Default";
     }
 
-    @OnlyIn(Dist.CLIENT)
-    protected void addLabelingTextBox(ModularGuiLineBuilder builder) {
-        builder.addTextInput(0, 137, (e, t) -> {
-            e.setValue("");
-            t.withTooltip(ImmutableList.of(CreateLang.translateDirect("display_source.label")
-                            .withStyle(s -> s.withColor(0x5391E1)),
-                    CreateLang.translateDirect("gui.schedule.lmb_edit")
-                            .withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC)));
-        }, "Label");
-    }
-
-    @Override
-    public List<List<MutableComponent>> provideFlapDisplayText(DisplayLinkContext context, DisplayTargetStats stats) {
-
-        if (allowsLabeling(context)) {
-            String label = context.sourceConfig()
-                    .getString("Label");
-            if (!label.isEmpty()) {
-                return ImmutableList.of(ImmutableList.of(Component.literal(label + " "), provideLine(context, stats)));
-            }
-        }
-
-        return super.provideFlapDisplayText(context, stats);
-    }
 }
